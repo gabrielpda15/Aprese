@@ -1,6 +1,6 @@
 # Aprese 
 
-Olá! Esse é um projeto desenvolvido para a disciplina de **Tópicos Especiais em Informatica** no curso de **Análise e desenvolvimento de sistemas** da **Faculdade de tecnologia de Botucatu**
+Olá! Esse é um projeto desenvolvido para a disciplina de **Tópicos Especiais em Informática** no curso de **Análise e Desenvolvimento de Sistemas** da [Fatec Botucatu](http://www.fatecbt.edu.br/)
 
 ## Aprese WebAPI
 
