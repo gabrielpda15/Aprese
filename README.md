@@ -6,4 +6,4 @@ Esse projeto foi gerado usando [Angular CLI](https://github.com/angular/angular-
 
 ### Servidor de desenvolvimento
 
-Rode `ng serve` para um server dev. Navegue até `http://localhost:4200/`. O app já vai recarregar os arquivos modificados automáticamente.
+Rode `ng serve` para um server dev. Navegue até `http://localhost:4200/` para visualiza-lo. O app já vai recarregar os arquivos modificados automáticamente.
