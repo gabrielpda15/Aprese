@@ -1,6 +1,6 @@
 # Aprese 
 
-Olá! Esse é um projeto desenvolvido para a disciplina de **Tópicos Especiais em Informática** no curso de **Análise e Desenvolvimento de Sistemas** da [Fatec Botucatu](http://www.fatecbt.edu.br/)
+Olá! Esse é um projeto desenvolvido para a disciplina de **Tópicos Especiais em Informática** no curso de **Análise e Desenvolvimento de Sistemas** da [Fatec Botucatu](http://www.fatecbt.edu.br/).
 
 ## Aprese WebAPI
 
@@ -9,6 +9,9 @@ Esse projeto foi gerado usando [Visual Studio](https://visualstudio.microsoft.co
 ### Tecnologias usadas
 
 É utilizado nesse projeto:
+ - Entity Framework Core
+ - Asp.Net Core
+ - MySQL
 
 
 ## NgAprese
