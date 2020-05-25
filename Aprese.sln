@@ -24,7 +24,15 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ngAprese", "ngAprese\", "{1
 		SlnRelativePath = "ngAprese\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aprese.WebAPI", "Aprese.WebAPI\Aprese.WebAPI.csproj", "{0401559C-96A7-4C39-86C2-81F2B1663DB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aprese.WebAPI", "Aprese.WebAPI\Aprese.WebAPI.csproj", "{0401559C-96A7-4C39-86C2-81F2B1663DB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aprese.Models", "Aprese.Models\Aprese.Models.csproj", "{D5A7D6C7-F1DB-42FF-BA56-E83AD0950B46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{AA2BEB9F-425F-43A1-8972-466D26F650DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aprese.Repository", "Aprese.Repository\Aprese.Repository.csproj", "{5FE038D6-E17B-4D37-8887-DEA59F21E375}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{29527A17-5748-4ACC-AFE9-4BECAB5A5A20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,9 +48,23 @@ Global
 		{0401559C-96A7-4C39-86C2-81F2B1663DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0401559C-96A7-4C39-86C2-81F2B1663DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0401559C-96A7-4C39-86C2-81F2B1663DB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A7D6C7-F1DB-42FF-BA56-E83AD0950B46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A7D6C7-F1DB-42FF-BA56-E83AD0950B46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A7D6C7-F1DB-42FF-BA56-E83AD0950B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A7D6C7-F1DB-42FF-BA56-E83AD0950B46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FE038D6-E17B-4D37-8887-DEA59F21E375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE038D6-E17B-4D37-8887-DEA59F21E375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE038D6-E17B-4D37-8887-DEA59F21E375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE038D6-E17B-4D37-8887-DEA59F21E375}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{170F33BB-D1C1-4AF7-A064-D51C3F6BBC34} = {AA2BEB9F-425F-43A1-8972-466D26F650DE}
+		{0401559C-96A7-4C39-86C2-81F2B1663DB6} = {AA2BEB9F-425F-43A1-8972-466D26F650DE}
+		{D5A7D6C7-F1DB-42FF-BA56-E83AD0950B46} = {29527A17-5748-4ACC-AFE9-4BECAB5A5A20}
+		{5FE038D6-E17B-4D37-8887-DEA59F21E375} = {29527A17-5748-4ACC-AFE9-4BECAB5A5A20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9CD4A4D-4CA3-420C-9C1C-D42FB01D5016}
