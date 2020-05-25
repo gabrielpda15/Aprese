@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29521.150
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aprese.WebAPI", "Aprese.WebAPI\Aprese.WebAPI.csproj", "{0401559C-96A7-4C39-86C2-81F2B1663DB6}"
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ngAprese", "ngAprese\", "{170F33BB-D1C1-4AF7-A064-D51C3F6BBC34}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
@@ -23,8 +25,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ngAprese", "ngAprese\", "{1
 		VWDPort = "64738"
 		SlnRelativePath = "ngAprese\"
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aprese.WebAPI", "Aprese.WebAPI\Aprese.WebAPI.csproj", "{0401559C-96A7-4C39-86C2-81F2B1663DB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aprese.Models", "Aprese.Models\Aprese.Models.csproj", "{D5A7D6C7-F1DB-42FF-BA56-E83AD0950B46}"
 EndProject
