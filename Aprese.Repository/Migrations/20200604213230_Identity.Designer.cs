@@ -3,14 +3,16 @@ using System;
 using Aprese.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aprese.Repository.Migrations
 {
     [DbContext(typeof(ApreseContext))]
-    partial class ApreseContextModelSnapshot : ModelSnapshot
+    [Migration("20200604213230_Identity")]
+    partial class Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
