@@ -2,31 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Aprese.Models
 {
-    public class Client : BaseEntity
+    public class City : BaseEntity
     {
         [DataType("varchar")]
-        [StringLength(30)]
+        [StringLength(50)]
         [ScaffoldColumn(false)]
         public string Name { get; set; }
 
         [DataType("varchar")]
         [StringLength(30)]
         [ScaffoldColumn(false)]
-        public string Naturality { get; set; }
+        public string FederalUnity { get; set; }
 
         [DataType("varchar")]
-        [StringLength(15)]
+        [StringLength(50)]
         [ScaffoldColumn(false)]
-        public string CPF { get; set; }
-
-        [DataType("varchar")]
-        [StringLength(19)]
-        [ScaffoldColumn(false)]
-        public string CNPJ { get; set; }
+        public string StateName { get; set; }
     }
 }
