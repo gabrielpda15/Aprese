@@ -4,14 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Aprese.Models.Base
+namespace Aprese.Models
 {
-    public class Client
+    public class Client : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Id { get; set; }
-
         [DataType("varchar")]
         [StringLength(70)]
         [ScaffoldColumn(false)]
