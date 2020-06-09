@@ -1,4 +1,5 @@
-﻿using Aprese.Models.Security;
+﻿using Aprese.Models;
+using Aprese.Models.Security;
 using Aprese.Models.Security.Relations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ namespace Aprese.Repository
     {
         public ApreseContext(DbContextOptions<ApreseContext> options) : base(options) { }
 
-
+        public DbSet<TestEntity> TestEntities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
