@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
@@ -18,8 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aprese.DependencyInjection\Aprese.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Aprese.Events\Aprese.Events.csproj" />
+    <ProjectReference Include="..\Aprese.Extensions\Aprese.Extensions.csproj" />
     <ProjectReference Include="..\Aprese.Models\Aprese.Models.csproj" />
     <ProjectReference Include="..\Aprese.Repository\Aprese.Repository.csproj" />
+    <ProjectReference Include="..\Aprese.Rules\Aprese.Rules.csproj" />
   </ItemGroup>
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Aprese.Repository;
+using Aprese.Repository.DefaultImpl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,7 +38,9 @@ namespace Aprese.WebAPI
                     o.ServerVersion(new Version(8, 0, 0), ServerType.MySql);
                 });
             });
+            services.AddEventsAndRules();
 
+            services.AddTransient<TestCommit>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
