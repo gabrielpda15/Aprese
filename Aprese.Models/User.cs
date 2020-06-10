@@ -2,23 +2,26 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Aprese.Models
 {
-    [Table("CFG_Client")]
-    public class Client : BaseEntity
+    public class User : BaseEntity
     {
         [DataType("varchar")]
-        [StringLength(30)]
+        [StringLength(50)]
         [ScaffoldColumn(false)]
         public string Name { get; set; }
 
         [DataType("varchar")]
         [StringLength(30)]
         [ScaffoldColumn(false)]
-        public string Naturality { get; set; }
+        public string Category { get; set; }
+
+        [DataType("varchar")]
+        [StringLength(30)]
+        [ScaffoldColumn(false)]
+        public string Type { get; set; }
 
         [DataType("varchar")]
         [StringLength(15)]
@@ -26,8 +29,8 @@ namespace Aprese.Models
         public string CPF { get; set; }
 
         [DataType("varchar")]
-        [StringLength(19)]
+        [StringLength(20)]
         [ScaffoldColumn(false)]
-        public string CNPJ { get; set; }
+        public string Password { get; set; }
     }
 }
