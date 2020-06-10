@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Aprese.Models.Security
 {
+    [Table("SEC_Role")]
     public class Role : IdentityRole<int>, IEntity
     {
         [Key]

@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Aprese.Models.Security.Relations
 {
+    [Table("SEC_RoleClaim")]
     public class RoleClaim : IdentityRoleClaim<int>, IEntity
     {
         [Key]

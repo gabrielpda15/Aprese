@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Aprese.Models.Security.Relations
 {
+    [Table("SEC_IdentityLogin")]
     public class IdentityLogin : IdentityUserLogin<int>, IEntity
     {
         public override int UserId { get => this.Id; set => this.Id = value; }
