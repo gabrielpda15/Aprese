@@ -17,12 +17,24 @@ namespace Aprese.Repository
     {
         public ApreseContext(DbContextOptions<ApreseContext> options) : base(options) { }
 
+        public DbSet<City> Cities { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+
+        // Entidade para testes de repositorio, não estara presente na versão final
         public DbSet<TestEntity> TestEntities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<City>().HasOne(x => x.State).WithMany().OnDelete(DeleteBehavior.Cascade);
+
+
+
+
+            // Sobrescrição das tables padrões do Entity Framework Identity
             builder.Entity<Identity>().ToTable("SEC_Identity");
             builder.Entity<Role>().ToTable("SEC_Role");
             builder.Entity<IdentityClaim>().ToTable("SEC_IdentityClaim");

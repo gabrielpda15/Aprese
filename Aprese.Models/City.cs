@@ -2,25 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Aprese.Models
 {
-    public class City : BaseEntity
+    [Table("LOC_City")]
+    public class City : BaseEntityDescription
     {
-        [DataType("varchar")]
-        [StringLength(50)]
-        [ScaffoldColumn(false)]
-        public string Name { get; set; }
-
-        [DataType("varchar")]
-        [StringLength(30)]
-        [ScaffoldColumn(false)]
-        public string FederalUnity { get; set; }
-
-        [DataType("varchar")]
-        [StringLength(50)]
-        [ScaffoldColumn(false)]
-        public string StateName { get; set; }
+        [Required]
+        public virtual State State { get; set; }
     }
 }

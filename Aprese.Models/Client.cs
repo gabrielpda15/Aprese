@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Aprese.Models
 {
-    [Table("CFG_Client")]
+    [Table("SIS_Client")]
     public class Client : BaseEntity
     {
         [DataType("varchar")]

@@ -2,19 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Aprese.Models
 {
-    public class State : BaseEntity
+    [Table("LOC_State")]
+    public class State : BaseEntityDescription
     {
         [DataType("varchar")]
-        [StringLength(50)]
-        [ScaffoldColumn(false)]
-        public string Name { get; set; }
-
-        [DataType("varchar")]
-        [StringLength(30)]
+        [StringLength(2)]
         [ScaffoldColumn(false)]
         public string FederalUnity { get; set; }
     }
