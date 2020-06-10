@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aprese.Repository.Interfaces
 {
-    public interface IRepository<TEntity> where TEntity : class, IEntity
+    public interface IRepository<TEntity> where TEntity : class
     {
         Task<TEntity> QueryByIdAsync(int id, CancellationToken ct = default);
         Task<IEnumerable<TEntity>> QueryAsync(Expression<Func<IQueryable<TEntity>, IQueryable<TEntity>>> query, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, CancellationToken ct = default);

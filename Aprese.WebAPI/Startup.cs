@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aprese.Models;
 using Aprese.Repository;
 using Aprese.Repository.DefaultImpl;
+using Aprese.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +33,7 @@ namespace Aprese.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddDbContext<ApreseContext>(options =>
             {
                 options.UseMySql(Configuration.GetConnectionString(CONN_STRING), o =>
@@ -38,9 +41,10 @@ namespace Aprese.WebAPI
                     o.ServerVersion(new Version(8, 0, 0), ServerType.MySql);
                 });
             });
-            services.AddEventsAndRules();
 
-            services.AddTransient<TestCommit>();
+            services.AddUserContext();
+            services.AddEventsAndRules();
+            services.AddRepositories();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

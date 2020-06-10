@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Aprese.Repository.Events
 {
-    public class CreateManyAction<TEntity> where TEntity : class, IEntity
+    public class CreateManyAction<TEntity> where TEntity : class
     {
         public IEnumerable<TEntity> Models { get; set; }
     }
