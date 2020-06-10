@@ -1,6 +1,8 @@
 ﻿using Aprese.Models.Base;
+using Aprese.Repository.Events;
 using Aprese.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +13,22 @@ using System.Threading.Tasks;
 
 namespace Aprese.Repository.DefaultImpl
 {
-    public class BaseRepository<TEntity, TContext> : IRepository<TEntity> 
-        where TEntity : class, IEntity
-        where TContext : DbContext
+    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected TContext Context { get; }
+        protected ApreseContext Context { get; }
 
         protected DbSet<TEntity> Entities { get; }
 
-        public BaseRepository(TContext context)
+        protected IServiceProvider Provider { get; }
+
+        public BaseRepository(ApreseContext context, IServiceProvider provider)
         {
             Context = context;
             Entities = Context.Set<TEntity>();
+            Provider = provider;
         }
 
-        public async Task<IEnumerable<TEntity>> QueryAsync(Expression<Func<IQueryable<TEntity>, IQueryable<TEntity>>> query, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, CancellationToken ct = default)
+        public virtual async Task<IEnumerable<TEntity>> QueryAsync(Expression<Func<IQueryable<TEntity>, IQueryable<TEntity>>> query, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, CancellationToken ct = default)
         {
             return await Task.Run(async () =>
             {
@@ -39,12 +42,12 @@ namespace Aprese.Repository.DefaultImpl
             }, ct);            
         }
 
-        public async Task<TEntity> QueryByIdAsync(int id, CancellationToken ct = default)
+        public virtual async Task<TEntity> QueryByIdAsync(int id, CancellationToken ct = default)
         {
             return await Entities.FindAsync(new[] { id }, ct);
         }
 
-        public async Task<TResult> QueryScalarAsync<TResult>(Expression<Func<IQueryable<TEntity>, TResult>> query, CancellationToken ct = default)
+        public virtual async Task<TResult> QueryScalarAsync<TResult>(Expression<Func<IQueryable<TEntity>, TResult>> query, CancellationToken ct = default)
         {
             return await Task.Run(() =>
             {
@@ -54,9 +57,27 @@ namespace Aprese.Repository.DefaultImpl
             }, ct);
         }
 
-        public async Task<TEntity> CreateAsync(TEntity entity, IUserContext userContext, CancellationToken ct = default)
+        public virtual async Task<TEntity> CreateAsync(TEntity entity, IUserContext userContext, CancellationToken ct = default)
         {
+            var events = Provider.GetServices<IEvent<CreateAction<TEntity>>>().OrderBy(x => x.Order);
+
+            foreach (var @event in events)
+            {
+                await @event.HandleAsync(new CreateAction<TEntity>() { Model = entity }, userContext, ct);
+            }
+
+            var rules = Provider.GetServices<IValidationRule<TEntity>>();
+
+            foreach (var rule in rules)
+            {
+                var messages = new Dictionary<string, string>();
+                var result = await rule.OnCreateAsync(entity, messages, ct);
+                if (!result) throw new InvalidModelException(messages, entity);
+            }
+
             Entities.Add(entity);
+
+            await Context.SaveChangesAsync(ct);
 
             return entity;
         }
