@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Microsoft.AspNetCore.Hosting
+namespace Aprese.Extensions
 {
     public static class WebHostBuilderExtensions
     {

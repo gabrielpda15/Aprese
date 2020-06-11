@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Aprese.Models\Aprese.Models.csproj" />
     <ProjectReference Include="..\Aprese.Repository\Aprese.Repository.csproj" />
     <ProjectReference Include="..\Aprese.Rules\Aprese.Rules.csproj" />
+    <ProjectReference Include="..\Aprese.ViewModels\Aprese.ViewModels.csproj" />
   </ItemGroup>
 
 

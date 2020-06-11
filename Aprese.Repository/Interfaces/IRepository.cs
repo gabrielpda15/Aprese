@@ -11,6 +11,7 @@ namespace Aprese.Repository.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
+        Task<TEntity> GetNew(IUserContext userContext, CancellationToken ct = default);
         Task<TEntity> QueryByIdAsync(int id, CancellationToken ct = default);
         Task<IEnumerable<TEntity>> QueryAsync(Expression<Func<IQueryable<TEntity>, IQueryable<TEntity>>> query, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, CancellationToken ct = default);
         Task<TResult> QueryScalarAsync<TResult>(Expression<Func<IQueryable<TEntity>, TResult>> query, CancellationToken ct = default);

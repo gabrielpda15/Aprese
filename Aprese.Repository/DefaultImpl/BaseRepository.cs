@@ -28,6 +28,23 @@ namespace Aprese.Repository.DefaultImpl
             Provider = provider;
         }
 
+        public virtual async Task<TEntity> GetNew(IUserContext userContext, CancellationToken ct = default)
+        {
+            var rules = Provider.GetServices<IValidationRule<TEntity>>();
+
+            var entity = Activator.CreateInstance<TEntity>();
+
+            foreach (var rule in rules)
+            {
+                if (!await rule.OnNew(entity, userContext))
+                {
+                    throw new InvalidModelException(null, entity);
+                }
+            }
+
+            return entity;
+        }
+
         public virtual async Task<IEnumerable<TEntity>> QueryAsync(Expression<Func<IQueryable<TEntity>, IQueryable<TEntity>>> query, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, CancellationToken ct = default)
         {
             return await Task.Run(async () =>

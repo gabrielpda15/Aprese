@@ -14,6 +14,6 @@ namespace Aprese.Repository.Interfaces
         Task<bool> OnCreateAsync(TEntity model, IDictionary<string, string> messages, CancellationToken ct = default);
         Task<bool> OnEditAsync(TEntity model, IDictionary<string, string> messages, CancellationToken ct = default);
         Task<bool> OnDeleteAsync(TEntity model, IDictionary<string, string> messages, CancellationToken ct = default);
-        bool OnNew(TEntity model, IUserContext userContext);
+        Task<bool> OnNew(TEntity model, IUserContext userContext);
     }
 }

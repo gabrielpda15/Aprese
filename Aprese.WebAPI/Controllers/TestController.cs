@@ -1,4 +1,5 @@
-﻿using Aprese.Models;
+﻿using Aprese.Extensions;
+using Aprese.Models;
 using Aprese.Repository;
 using Aprese.Repository.DefaultImpl;
 using Aprese.Repository.Interfaces;
@@ -12,20 +13,21 @@ using System.Threading.Tasks;
 
 namespace Aprese.WebAPI.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class TestController : Controller
+    public class TestController : ApreseController
     {
-        public async Task<IActionResult> GetAsync([FromServices] IServiceProvider provider, CancellationToken ct)
-        
+        public TestController(IServiceProvider provider) : base(provider)
         {
-            var temp = provider.GetService<IRepository<TestEntity>>();
+        }
 
+        public async Task<IActionResult> GetAsync([FromServices] IRepository<TestEntity> testRepo, CancellationToken ct)        
+        {
+            var entity = await testRepo.GetNew(UserContext, ct);
 
+            entity.Description = "Tesssst";
 
+            await testRepo.CreateAsync(entity, UserContext, ct);
 
-
-            await temp.CreateAsync(new TestEntity() { Description = "Tesssst" }, null, ct);
             return Ok();
         }
     }

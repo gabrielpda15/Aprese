@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Aprese.Models
+namespace Aprese.Models.Configuration
 {
     [Table("CFG_Status")]
     public class Status : BaseEntity
