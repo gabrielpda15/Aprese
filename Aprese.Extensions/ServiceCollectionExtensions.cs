@@ -82,7 +82,7 @@ namespace Aprese.Extensions
             services.AddScoped<IUserContext>(s => 
             {
                 var userContext = new UserContext();
-                s.GetRequiredService<IUserContextLoader>().LoadData(new UserContext());
+                s.GetRequiredService<IUserContextLoader>().LoadData(userContext);
                 return userContext;
             });
             return services;
