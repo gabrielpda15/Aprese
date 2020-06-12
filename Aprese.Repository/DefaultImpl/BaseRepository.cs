@@ -31,7 +31,7 @@ namespace Aprese.Repository.DefaultImpl
         public virtual async Task<TEntity> GetNew(IUserContext userContext, CancellationToken ct = default)
         {
             var rules = Provider.GetServices<IValidationRule<TEntity>>();
-
+            
             var entity = Activator.CreateInstance<TEntity>();
 
             foreach (var rule in rules)

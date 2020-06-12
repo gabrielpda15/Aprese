@@ -95,7 +95,10 @@ namespace Aprese.Extensions
 
             foreach (var type in types)
             {
-                services.AddTransient(type.GetInterfaces().FirstOrDefault(), type);
+                foreach (var @interface in type.GetInterfaces())
+                {
+                    services.AddTransient(@interface, type);
+                }
             }
 
             return services;
