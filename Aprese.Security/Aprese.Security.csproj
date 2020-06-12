@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aprese.Models\Aprese.Models.csproj" />
+    <ProjectReference Include="..\Aprese.Repository\Aprese.Repository.csproj" />
+    <ProjectReference Include="..\Aprese.ViewModels\Aprese.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

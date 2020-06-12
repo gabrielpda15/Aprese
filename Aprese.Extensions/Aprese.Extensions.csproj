@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Aprese.Repository\Aprese.Repository.csproj" />
+    <ProjectReference Include="..\Aprese.Security\Aprese.Security.csproj" />
   </ItemGroup>
 
 </Project>

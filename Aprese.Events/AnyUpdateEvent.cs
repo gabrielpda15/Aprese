@@ -16,8 +16,8 @@ namespace Aprese.Events
         public async Task HandleAsync(UpdateAction<IEntity> eventArg, IUserContext userContext, CancellationToken ct = default)
         {
             eventArg.Model.EditionDate = DateTime.Now;
-            eventArg.Model.EditionUser = userContext.Principal.Identity.Name;
-            eventArg.Model.EditionIp = userContext.Ip;
+            eventArg.Model.EditionUser = userContext?.Principal?.Identity?.Name;
+            eventArg.Model.EditionIp = userContext?.Ip;
 
             await Task.FromResult(0);
         }
@@ -27,8 +27,8 @@ namespace Aprese.Events
             foreach (var entity in eventArg.Models)
             {
                 entity.EditionDate = DateTime.Now;
-                entity.EditionUser = userContext.Principal.Identity.Name;
-                entity.EditionIp = userContext.Ip;
+                entity.EditionUser = userContext?.Principal?.Identity?.Name;
+                entity.EditionIp = userContext?.Ip;
             }
 
             await Task.FromResult(0);

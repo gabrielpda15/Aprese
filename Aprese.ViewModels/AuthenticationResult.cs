@@ -10,5 +10,6 @@ namespace Aprese.ViewModels
         public string CreatedAt { get; set; }
         public string Expiration { get; set; }
         public string AccessToken { get; set; }
+        public string Message { get; set; }
     }
 }

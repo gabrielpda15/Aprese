@@ -9,7 +9,7 @@ using System.Text;
 namespace Aprese.Extensions
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ApreseController : ControllerBase
     {
         protected IUserContext UserContext { get; }

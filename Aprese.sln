@@ -48,6 +48,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{6E8728
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aprese.ViewModels", "Aprese.ViewModels\Aprese.ViewModels.csproj", "{83F8DC56-0A47-4700-84FB-EAA407D29B9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aprese.Security", "Aprese.Security\Aprese.Security.csproj", "{7F785C19-9E60-48EC-95B4-5C2CF439A76D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{83F8DC56-0A47-4700-84FB-EAA407D29B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F8DC56-0A47-4700-84FB-EAA407D29B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F8DC56-0A47-4700-84FB-EAA407D29B9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F785C19-9E60-48EC-95B4-5C2CF439A76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F785C19-9E60-48EC-95B4-5C2CF439A76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F785C19-9E60-48EC-95B4-5C2CF439A76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F785C19-9E60-48EC-95B4-5C2CF439A76D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +109,7 @@ Global
 		{A543DC5E-8783-4FEE-BEAF-BE00FC556ADA} = {29527A17-5748-4ACC-AFE9-4BECAB5A5A20}
 		{3CB4FC5F-0AE1-4C5A-A94A-389ABA086A4C} = {FA32BA4F-8A81-4C2A-81F3-67E13EBB7265}
 		{83F8DC56-0A47-4700-84FB-EAA407D29B9B} = {6E8728B3-299A-4B90-927F-7D2E01D1FCE1}
+		{7F785C19-9E60-48EC-95B4-5C2CF439A76D} = {FA32BA4F-8A81-4C2A-81F3-67E13EBB7265}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9CD4A4D-4CA3-420C-9C1C-D42FB01D5016}

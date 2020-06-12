@@ -1,4 +1,5 @@
-﻿using Aprese.Repository.Interfaces;
+﻿using Aprese.Models.Base;
+using Aprese.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Aprese.Extensions
 {
-    public class CrudController<TEntity> : ApreseController where TEntity : class
+    public class CrudController<TEntity> : ApreseController where TEntity : class, IEntity
     {
         protected IRepository<TEntity> Repository { get; }
 

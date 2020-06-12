@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aprese.Extensions;
 using Aprese.Models;
 using Aprese.Repository;
 using Aprese.Repository.DefaultImpl;
 using Aprese.Repository.Interfaces;
+using Aprese.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +34,7 @@ namespace Aprese.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
 
             services.AddDbContext<ApreseContext>(options =>
@@ -42,9 +45,14 @@ namespace Aprese.WebAPI
                 });
             });
 
+            services.AddApreseSecurity<ApreseContext>(Configuration);
             services.AddUserContext();
             services.AddEventsAndRules();
             services.AddRepositories();
+
+            services.AddMvcCore()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddJsonOptions(opt => opt.JsonSerializerOptions.IgnoreNullValues = true);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -54,10 +62,9 @@ namespace Aprese.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(option => option.AllowAnyOrigin());
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -17,10 +17,10 @@ namespace Aprese.Events
         {
             eventArg.Model.CreationDate = DateTime.Now;
             eventArg.Model.EditionDate = DateTime.Now;
-            eventArg.Model.CreationUser = userContext.Principal.Identity.Name;
-            eventArg.Model.EditionUser = userContext.Principal.Identity.Name;
-            eventArg.Model.CreationIp = userContext.Ip;
-            eventArg.Model.EditionIp = userContext.Ip;
+            eventArg.Model.CreationUser = userContext?.Principal?.Identity?.Name;
+            eventArg.Model.EditionUser = userContext?.Principal?.Identity?.Name;
+            eventArg.Model.CreationIp = userContext?.Ip;
+            eventArg.Model.EditionIp = userContext?.Ip;
 
             await Task.FromResult(0);
         }
@@ -31,10 +31,10 @@ namespace Aprese.Events
             {
                 entity.CreationDate = DateTime.Now;
                 entity.EditionDate = DateTime.Now;
-                entity.CreationUser = userContext.Principal.Identity.Name;
-                entity.EditionUser = userContext.Principal.Identity.Name;
-                entity.CreationIp = userContext.Ip;
-                entity.EditionIp = userContext.Ip;
+                entity.CreationUser = userContext?.Principal?.Identity?.Name;
+                entity.EditionUser = userContext?.Principal?.Identity?.Name;
+                entity.CreationIp = userContext?.Ip;
+                entity.EditionIp = userContext?.Ip;
             }
 
             await Task.FromResult(0);
