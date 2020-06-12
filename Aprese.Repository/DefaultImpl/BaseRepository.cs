@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Aprese.Repository.DefaultImpl
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
         protected ApreseContext Context { get; }
 
@@ -64,11 +64,11 @@ namespace Aprese.Repository.DefaultImpl
             return await Entities.FindAsync(new[] { id }, ct);
         }
 
-        public virtual async Task<TResult> QueryScalarAsync<TResult>(Expression<Func<IQueryable<TEntity>, TResult>> query, CancellationToken ct = default)
+        public virtual async Task<TResult> QueryScalarAsync<TResult>(Expression<Func<IQueryable<TEntity>, Task<TResult>>> query, CancellationToken ct = default)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
-                var result = query.Compile().Invoke(Entities);
+                var result = await query.Compile().Invoke(Entities);
 
                 return result;
             }, ct);
@@ -76,7 +76,13 @@ namespace Aprese.Repository.DefaultImpl
 
         public virtual async Task<TEntity> CreateAsync(TEntity entity, IUserContext userContext, CancellationToken ct = default)
         {
+            var globalEvents = Provider.GetServices<IEvent<CreateAction<IEntity>>>().OrderBy(x => x.Order);
             var events = Provider.GetServices<IEvent<CreateAction<TEntity>>>().OrderBy(x => x.Order);
+
+            foreach (var @event in globalEvents)
+            {
+                await @event.HandleAsync(new CreateAction<IEntity>() { Model = entity }, userContext, ct);
+            }
 
             foreach (var @event in events)
             {
@@ -99,29 +105,164 @@ namespace Aprese.Repository.DefaultImpl
             return entity;
         }
 
-        public Task<IEnumerable<TEntity>> CreateManyAsync(IEnumerable<TEntity> entities, IUserContext userContext, CancellationToken ct = default)
+        public async Task<IEnumerable<TEntity>> CreateManyAsync(IEnumerable<TEntity> entities, IUserContext userContext, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            var globalEvents = Provider.GetServices<IEvent<CreateManyAction<IEntity>>>().OrderBy(x => x.Order);
+            var events = Provider.GetServices<IEvent<CreateManyAction<TEntity>>>().OrderBy(x => x.Order);
+
+            foreach (var @event in globalEvents)
+            {
+                await @event.HandleAsync(new CreateManyAction<IEntity>() { Models = entities }, userContext, ct);
+            }
+
+            foreach (var @event in events)
+            {
+                await @event.HandleAsync(new CreateManyAction<TEntity>() { Models = entities }, userContext, ct);
+            }
+
+            var rules = Provider.GetServices<IValidationRule<TEntity>>();
+
+            foreach (var rule in rules)
+            {
+                foreach (var entity in entities)
+                {
+                    var messages = new Dictionary<string, string>();
+                    var result = await rule.OnCreateAsync(entity, messages, ct);
+                    if (!result) throw new InvalidModelException(messages, entity);
+                }
+            }
+
+            Entities.AddRange(entities);
+
+            await Context.SaveChangesAsync(ct);
+
+            return entities;
         }
 
-        public Task<TEntity> UpdateAsync(TEntity entity, IUserContext userContext, CancellationToken ct = default)
+        public async Task<TEntity> UpdateAsync(TEntity entity, IUserContext userContext, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            var globalEvents = Provider.GetServices<IEvent<UpdateAction<IEntity>>>().OrderBy(x => x.Order);
+            var events = Provider.GetServices<IEvent<UpdateAction<TEntity>>>().OrderBy(x => x.Order);
+
+            foreach (var @event in globalEvents)
+            {
+                await @event.HandleAsync(new UpdateAction<IEntity>() { Model = entity }, userContext, ct);
+            }
+
+            foreach (var @event in events)
+            {
+                await @event.HandleAsync(new UpdateAction<TEntity>() { Model = entity }, userContext, ct);
+            }
+
+            var rules = Provider.GetServices<IValidationRule<TEntity>>();
+
+            foreach (var rule in rules)
+            {
+                var messages = new Dictionary<string, string>();
+                var result = await rule.OnEditAsync(entity, messages, ct);
+                if (!result) throw new InvalidModelException(messages, entity);
+            }
+
+            Entities.Update(entity);
+
+            await Context.SaveChangesAsync(ct);
+
+            return entity;
         }
 
-        public Task<IEnumerable<TEntity>> UpdateManyAsync(IEnumerable<TEntity> entities, IUserContext userContext, CancellationToken ct = default)
+        public async Task<IEnumerable<TEntity>> UpdateManyAsync(IEnumerable<TEntity> entities, IUserContext userContext, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            var globalEvents = Provider.GetServices<IEvent<UpdateManyAction<IEntity>>>().OrderBy(x => x.Order);
+            var events = Provider.GetServices<IEvent<UpdateManyAction<TEntity>>>().OrderBy(x => x.Order);
+
+            foreach (var @event in globalEvents)
+            {
+                await @event.HandleAsync(new UpdateManyAction<IEntity>() { Models = entities }, userContext, ct);
+            }
+
+            foreach (var @event in events)
+            {
+                await @event.HandleAsync(new UpdateManyAction<TEntity>() { Models = entities }, userContext, ct);
+            }
+
+            var rules = Provider.GetServices<IValidationRule<TEntity>>();
+
+            foreach (var rule in rules)
+            {
+                foreach (var entity in entities)
+                {
+                    var messages = new Dictionary<string, string>();
+                    var result = await rule.OnEditAsync(entity, messages, ct);
+                    if (!result) throw new InvalidModelException(messages, entity);
+                }
+            }
+
+            Entities.UpdateRange(entities);
+
+            await Context.SaveChangesAsync(ct);
+
+            return entities;
         }
 
-        public Task DeleteAsync(TEntity entity, IUserContext userContext, CancellationToken ct = default)
+        public async Task DeleteAsync(TEntity entity, IUserContext userContext, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            var globalEvents = Provider.GetServices<IEvent<DeleteAction<IEntity>>>().OrderBy(x => x.Order);
+            var events = Provider.GetServices<IEvent<DeleteAction<TEntity>>>().OrderBy(x => x.Order);
+
+            foreach (var @event in globalEvents)
+            {
+                await @event.HandleAsync(new DeleteAction<IEntity>() { Model = entity }, userContext, ct);
+            }
+
+            foreach (var @event in events)
+            {
+                await @event.HandleAsync(new DeleteAction<TEntity>() { Model = entity }, userContext, ct);
+            }
+
+            var rules = Provider.GetServices<IValidationRule<TEntity>>();
+
+            foreach (var rule in rules)
+            {
+                var messages = new Dictionary<string, string>();
+                var result = await rule.OnDeleteAsync(entity, messages, ct);
+                if (!result) throw new InvalidModelException(messages, entity);
+            }
+
+            Entities.Remove(entity);
+
+            await Context.SaveChangesAsync(ct);
         }
 
-        public Task DeleteManyAsync(IEnumerable<TEntity> entities, IUserContext userContext, CancellationToken ct = default)
+        public async Task DeleteManyAsync(IEnumerable<TEntity> entities, IUserContext userContext, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            var globalEvents = Provider.GetServices<IEvent<DeleteManyAction<IEntity>>>().OrderBy(x => x.Order);
+            var events = Provider.GetServices<IEvent<DeleteManyAction<TEntity>>>().OrderBy(x => x.Order);
+
+            foreach (var @event in globalEvents)
+            {
+                await @event.HandleAsync(new DeleteManyAction<IEntity>() { Models = entities }, userContext, ct);
+            }
+
+            foreach (var @event in events)
+            {
+                await @event.HandleAsync(new DeleteManyAction<TEntity>() { Models = entities }, userContext, ct);
+            }
+
+            var rules = Provider.GetServices<IValidationRule<TEntity>>();
+
+            foreach (var rule in rules)
+            {
+                foreach (var entity in entities)
+                {
+                    var messages = new Dictionary<string, string>();
+                    var result = await rule.OnDeleteAsync(entity, messages, ct);
+                    if (!result) throw new InvalidModelException(messages, entity);
+                }
+            }
+
+            Entities.RemoveRange(entities);
+
+            await Context.SaveChangesAsync(ct);
         }
     }
 }

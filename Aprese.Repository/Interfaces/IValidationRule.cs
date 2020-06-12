@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Aprese.Repository.Interfaces
 {
     [InjectableRule]
-    public interface IValidationRule<TEntity> where TEntity : class
+    public interface IValidationRule<TEntity> where TEntity : class, IEntity
     {
         Task<bool> OnCreateAsync(TEntity model, IDictionary<string, string> messages, CancellationToken ct = default);
         Task<bool> OnEditAsync(TEntity model, IDictionary<string, string> messages, CancellationToken ct = default);
