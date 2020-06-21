@@ -11,6 +11,7 @@ namespace Aprese.Models.Security
     [Table("SEC_Identity")]
     public class Identity : IdentityUser<int>, IEntity
     {
+        #region BaseEntity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public override int Id { get; set; }
@@ -40,5 +41,21 @@ namespace Aprese.Models.Security
 
         [ScaffoldColumn(false)]
         public DateTime? CreationDate { get; set; }
+        #endregion
+
+        [Required]
+        [DataType("varchar")]
+        [StringLength(30)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DataType("varchar")]
+        [StringLength(80)]
+        public string LastName { get; set; }
+
+        [Required]
+        [DataType("varchar")]
+        [StringLength(15)]
+        public string CPF { get; set; }
     }
 }

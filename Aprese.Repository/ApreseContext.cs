@@ -32,6 +32,8 @@ namespace Aprese.Repository
         {
             base.OnModelCreating(builder);
 
+            builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+
             builder.Entity<City>().HasOne(x => x.State).WithMany().OnDelete(DeleteBehavior.Cascade);
 
 
