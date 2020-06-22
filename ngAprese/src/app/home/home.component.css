@@ -1,0 +1,8 @@
+.hm-banner {
+  background-color: rgba(238, 238, 238, 0.733) !important;
+  /* background-image: url('../../assets/banner.jpg'); */
+  background-blend-mode: color;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
