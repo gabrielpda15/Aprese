@@ -1,0 +1,21 @@
+<div class="w-2/3 mx-auto">
+  <div class="bg-white shadow-md rounded my-6">
+    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+      <thead>
+        <tr>
+          <th *ngFor="let field of data.fields" class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">{{ field.name }}</th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.values" class="hover:bg-grey-lighter">
+          <td *ngFor="let field of data.fields" class="py-4 px-6 border-b border-grey-light">{{ item[field.key] }}</td>
+          <td *ngIf="actions != ActionsType.none" class="py-4 px-6 border-b border-grey-light">
+            <a *ngIf="actions == ActionsType.both || actions == ActionsType.onlyEdit" href="#" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Editar</a>
+            <a *ngIf="actions == ActionsType.both || actions == ActionsType.onlyView" href="#" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark">Ver</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

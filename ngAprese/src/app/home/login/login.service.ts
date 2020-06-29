@@ -15,6 +15,6 @@ export class LoginService {
 
   public postLogin(user: LoginUser): Observable<AuthenticationResult> {
     return this.http.post<any>(`${API_ENDPOINT}/login`, JSON.stringify(user), getHttpOptions(null))
-                .pipe(map(x => new AuthenticationResult(x)));
+                .pipe(map(x => { console.log(x); return new AuthenticationResult(x); }));
   }
 }

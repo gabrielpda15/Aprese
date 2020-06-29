@@ -5,7 +5,7 @@ import { SessionService } from '../shared/session.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
@@ -17,16 +17,15 @@ export class HomeComponent implements OnInit {
   }
 
   public isLoggedIn(): boolean {
-    return this.session.Token != null;
+    return this.session?.Token != null;
   }
 
-  public onLoginDisable(event: boolean) {
-    this.showLogin = !event;
+  public onLoginDisable() {
+    this.showLogin = false;
   }
 
-  public onLoginClick(event: any): void {
+  public onLoginClick(): void {
     this.showLogin = true;
-    console.log(this.router);
   }
 
 }

@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
 
@@ -11,16 +11,14 @@ export class ModalComponent implements OnInit {
 
   @Input() public title = 'Modal';
   @Input() public submitText = 'Ok';
-  @Output() public disabled = new EventEmitter<boolean>();
-  @Output() public submitAction = new EventEmitter<void>();
-
-  // @ViewChild('form', {static: false}) public form: ElementRef;
+  @Output() public exitAction = new EventEmitter<any>();
+  @Output() public submitAction = new EventEmitter<any>();
 
   ngOnInit() {
   }
 
-  public onExit(event: any): void {
-    this.disabled.emit(true);
+  public onExit(): void {
+    this.exitAction.emit();
   }
 
   public onSubmit(): void {

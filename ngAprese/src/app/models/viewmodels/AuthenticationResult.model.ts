@@ -6,10 +6,10 @@ export class AuthenticationResult {
   public Message: string;
 
   constructor(obj?: any) {
-    this.Authenticated = obj && obj.Authenticated || false;
-    this.CreatedAt = obj && obj.CreatedAt || null;
-    this.Expiration = obj && obj.Expiration || null;
-    this.AccessToken = obj && obj.AccessToken || null;
-    this.Message = obj && obj.Message || null;
+    this.Authenticated = obj && obj.authenticated || false;
+    this.CreatedAt = obj && obj.createdAt || null;
+    this.Expiration = obj && obj.expiration || null;
+    this.AccessToken = obj && obj.accessToken || null;
+    this.Message = obj && obj.message || null;
   }
 }

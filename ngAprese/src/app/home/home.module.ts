@@ -6,12 +6,13 @@ import { AboutComponent } from './about/about.component';
 import { HomeContentComponent } from './content/content.component';
 import { routing } from './home.routing';
 import { SharedModule } from '../shared/shared.module';
+import { LoginService } from './login/login.service';
 
 
 
 @NgModule({
   declarations: [HomeComponent, LoginComponent, AboutComponent, HomeContentComponent],
   imports: [CommonModule, routing, SharedModule],
-  providers: []
+  providers: [LoginService]
 })
 export class HomeModule { }

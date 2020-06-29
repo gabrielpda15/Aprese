@@ -27,13 +27,13 @@
     </div>
     <div>
       <p *ngIf="isLoggedIn()" class="inline-block text-white mt-4 text-sm px-4 py-2 leading-none">Bem vindo, {{session.Username}}</p>
-      <a *ngIf="!isLoggedIn()" (click)="onLoginClick($event)" class="inline-block cursor-pointer text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-indigo-500 hover:bg-white mt-4 lg:mt-0">Login</a>
+      <a *ngIf="!isLoggedIn()" (click)="onLoginClick()" class="inline-block cursor-pointer text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-indigo-500 hover:bg-white mt-4 lg:mt-0">Login</a>
       <a *ngIf="isLoggedIn()" [routerLink]="['/system']" class="inline-block cursor-pointer text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-indigo-500 hover:bg-white mt-4 lg:mt-0">Acesso ao Sistema</a>
     </div>
   </div>
 </nav>
 
-<app-login *ngIf="showLogin" (disabled)="onLoginDisable($event)"></app-login>
+<app-login *ngIf="showLogin" (onExit)="onLoginDisable()"></app-login>
 
   <div *ngIf="router.url === '/'" class="hm-banner w-screen h-full bg-indigo-200 py-16">
     <div class="text-center py-16">
