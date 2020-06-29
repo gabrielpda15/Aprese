@@ -8,8 +8,9 @@ using System.Text;
 
 namespace Aprese.Extensions
 {
+    [Authorize("Bearer")]
     [ApiController]
-    [Authorize]
+    [Route("api/[controller]")]
     public class ApreseController : ControllerBase
     {
         protected IUserContext UserContext { get; }

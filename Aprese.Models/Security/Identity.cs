@@ -57,5 +57,8 @@ namespace Aprese.Models.Security
         [DataType("varchar")]
         [StringLength(15)]
         public string CPF { get; set; }
+
+        [NotMapped]
+        public string Password { get; set; }
     }
 }

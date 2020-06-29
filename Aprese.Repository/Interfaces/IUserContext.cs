@@ -11,7 +11,7 @@ namespace Aprese.Repository.Interfaces
         IPrincipal Principal { get; set; }
         string Ip { get; set; }
         string HostName { get; set; }
-        IEnumerable<string> Roles { get; set; }
+        object Data { get; set; }
         IEnumerable<Claim> Claims { get; set; }
     }
 }

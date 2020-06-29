@@ -30,9 +30,7 @@ namespace Aprese.Repository.DefaultImpl.Security
                     userContext.Ip = httpContext.Connection.RemoteIpAddress.ToString();
                     userContext.HostName = httpContext.Connection.RemoteIpAddress.ToString();
                     userContext.Claims = httpContext.User.Claims;
-                    userContext.Roles = userContext.Claims
-                        .Where(x => x.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
-                        .Select(x => x.Value);
+                    userContext.Data = userContext.Claims.Where(x => x.Type.ToLower() == "data").SingleOrDefault().Value;
                 }
             }
             catch { }

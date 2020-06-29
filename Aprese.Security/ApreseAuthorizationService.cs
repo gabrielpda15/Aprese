@@ -19,7 +19,7 @@ namespace Aprese.Security
 
         public ApreseAuthorizationService(IServiceProvider provider)
         {
-            Provider = provider;
+            Provider = provider.CreateScope().ServiceProvider;
         }
 
         public async Task<BaseResult<Identity>> AuthorizeAsync(LoginUser loginUser, CancellationToken ct = default)
@@ -40,7 +40,7 @@ namespace Aprese.Security
                 };
             }
 
-            var repo = Provider.GetRequiredService<IRepository<Identity>>();
+            var repo = Provider.GetService<IRepository<Identity>>();
 
             var identity = await repo.QueryScalarAsync(q => q.SingleOrDefaultAsync(x => x.UserName == username, ct), ct);
             var crypt = Provider.GetRequiredService<Cryptography>();

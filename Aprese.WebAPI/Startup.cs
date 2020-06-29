@@ -49,6 +49,7 @@ namespace Aprese.WebAPI
             services.AddUserContext();
             services.AddEventsAndRules();
             services.AddRepositories();
+            services.AddSingleton<Cryptography>();
 
             services.AddMvcCore()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
@@ -62,7 +63,7 @@ namespace Aprese.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(option => option.AllowAnyOrigin());
+            app.UseCors(option => option.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();

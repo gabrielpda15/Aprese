@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Aprese.Repository.DefaultImpl
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
+    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected ApreseContext Context { get; }
 
@@ -81,7 +81,7 @@ namespace Aprese.Repository.DefaultImpl
 
             foreach (var @event in globalEvents)
             {
-                await @event.HandleAsync(new CreateAction<IEntity>() { Model = entity }, userContext, ct);
+                await @event.HandleAsync(new CreateAction<IEntity>() { Model = (IEntity)entity }, userContext, ct);
             }
 
             foreach (var @event in events)
@@ -112,7 +112,7 @@ namespace Aprese.Repository.DefaultImpl
 
             foreach (var @event in globalEvents)
             {
-                await @event.HandleAsync(new CreateManyAction<IEntity>() { Models = entities }, userContext, ct);
+                await @event.HandleAsync(new CreateManyAction<IEntity>() { Models = (IEnumerable<IEntity>)entities }, userContext, ct);
             }
 
             foreach (var @event in events)
@@ -146,7 +146,7 @@ namespace Aprese.Repository.DefaultImpl
 
             foreach (var @event in globalEvents)
             {
-                await @event.HandleAsync(new UpdateAction<IEntity>() { Model = entity }, userContext, ct);
+                await @event.HandleAsync(new UpdateAction<IEntity>() { Model = (IEntity)entity }, userContext, ct);
             }
 
             foreach (var @event in events)
@@ -177,7 +177,7 @@ namespace Aprese.Repository.DefaultImpl
 
             foreach (var @event in globalEvents)
             {
-                await @event.HandleAsync(new UpdateManyAction<IEntity>() { Models = entities }, userContext, ct);
+                await @event.HandleAsync(new UpdateManyAction<IEntity>() { Models = (IEnumerable<IEntity>)entities }, userContext, ct);
             }
 
             foreach (var @event in events)
@@ -211,7 +211,7 @@ namespace Aprese.Repository.DefaultImpl
 
             foreach (var @event in globalEvents)
             {
-                await @event.HandleAsync(new DeleteAction<IEntity>() { Model = entity }, userContext, ct);
+                await @event.HandleAsync(new DeleteAction<IEntity>() { Model = (IEntity)entity }, userContext, ct);
             }
 
             foreach (var @event in events)
@@ -240,7 +240,7 @@ namespace Aprese.Repository.DefaultImpl
 
             foreach (var @event in globalEvents)
             {
-                await @event.HandleAsync(new DeleteManyAction<IEntity>() { Models = entities }, userContext, ct);
+                await @event.HandleAsync(new DeleteManyAction<IEntity>() { Models = (IEnumerable<IEntity>)entities }, userContext, ct);
             }
 
             foreach (var @event in events)

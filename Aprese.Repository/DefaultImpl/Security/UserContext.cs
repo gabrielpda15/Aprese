@@ -12,7 +12,7 @@ namespace Aprese.Repository.DefaultImpl.Security
         public IPrincipal Principal { get; set; }
         public string Ip { get; set; }
         public string HostName { get; set; }
-        public IEnumerable<string> Roles { get; set; }
+        public object Data { get; set; }
         public IEnumerable<Claim> Claims { get; set; }
     }
 }

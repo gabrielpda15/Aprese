@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aprese.Repository.Interfaces
 {
-    public interface IRepository<TEntity> where TEntity : class, IEntity
+    public interface IRepository<TEntity> where TEntity : class
     {
         Task<TEntity> GetNew(IUserContext userContext, CancellationToken ct = default);
         Task<TEntity> QueryByIdAsync(int id, CancellationToken ct = default);

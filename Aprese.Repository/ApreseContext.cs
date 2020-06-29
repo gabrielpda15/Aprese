@@ -24,9 +24,7 @@ namespace Aprese.Repository
         public DbSet<State> States { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Status> Statuses { get; set; }
-
-        // Entidade para testes de repositorio, não estara presente na versão final
-        public DbSet<TestEntity> TestEntities { get; set; }
+        public DbSet<Models.System.Task> Tasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

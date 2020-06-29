@@ -41,7 +41,7 @@ namespace Aprese.Extensions
             var tokenConfig = configuration.GetObject<TokenConfiguration>();
             services.AddSingleton(tokenConfig);
 
-            var signingConfig = new SigningConfiguration();
+            var signingConfig = new SigningConfiguration(tokenConfig);
             services.AddSingleton(signingConfig);
 
             services.AddAuthentication(opt =>

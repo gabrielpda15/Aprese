@@ -40,7 +40,7 @@ namespace Aprese.Security
                     {
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
                         new Claim(JwtRegisteredClaimNames.UniqueName, result.Data.UserName),
-                        new Claim("Data", ToJson(result.Data))
+                        new Claim("data", ToJson(result.Data))
                     };
 
                     var subject = new ClaimsIdentity(new GenericIdentity(result.Data.UserName, "Login"), claims);
